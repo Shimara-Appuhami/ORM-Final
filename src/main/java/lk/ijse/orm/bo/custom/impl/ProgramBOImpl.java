@@ -15,7 +15,7 @@ public class ProgramBOImpl implements ProgramBO {
     ProgramDAO programDAO= (ProgramDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PROGRAM);
     @Override
     public boolean addProgram(ProgramDTO dto) throws Exception {
-        return programDAO.save(dto.getProgram_id(),dto.getProgram_name(),dto.getDuration(),dto.getFee());
+        return programDAO.save(new Program(dto.getProgram_id(),dto.getProgram_name(),dto.getDuration(),dto.getFee()));
 
     }
 
@@ -36,6 +36,6 @@ public class ProgramBOImpl implements ProgramBO {
 
     @Override
     public boolean updateProgram(ProgramDTO dto) throws Exception {
-        return programDAO.update(dto.getProgram_id(),dto.getProgram_name(),dto.getDuration(),dto.getFee());
+        return programDAO.update(new Program(dto.getProgram_id(),dto.getProgram_name(),dto.getDuration(),dto.getFee()));
     }
 }

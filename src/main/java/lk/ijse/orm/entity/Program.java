@@ -30,6 +30,13 @@ public class Program implements Serializable {
         this.studentDetails = studentDetails;
     }
 
+    public Program(String programId, String programName, String duration, double fee) {
+        this.program_id = programId;
+        this.program_name = programName;
+        this.duration = duration;
+        this.fee = fee;
+    }
+
     public String getProgram_id() {
         return program_id;
     }

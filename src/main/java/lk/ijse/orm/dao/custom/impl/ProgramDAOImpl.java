@@ -27,15 +27,9 @@ public class ProgramDAOImpl implements ProgramDAO {
     public ArrayList<Program> getAll() throws SQLException, ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
-        // Perform HQL query to retrieve all customers
         List<Program> programList = session.createQuery("FROM Program ", Program.class).list();
-
-        // Commit the transaction and close the session
         transaction.commit();
         session.close();
-
-        // Convert List to ArrayList
         return new ArrayList<>(programList);
     }
     @Override
@@ -52,10 +46,11 @@ public class ProgramDAOImpl implements ProgramDAO {
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(id);
+        Program program = session.get(Program.class, id);
+        session.delete(program);
         transaction.commit();
         session.close();
-        return false;
+        return true;
     }
 
     @Override
@@ -64,13 +59,5 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
 
-    @Override
-    public boolean save(String programId, String programName, String duration, double fee) {
-        return false;
-    }
 
-    @Override
-    public boolean update(String programId, String programName, String duration, double fee) {
-        return false;
-    }
 }

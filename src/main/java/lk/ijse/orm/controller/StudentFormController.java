@@ -304,15 +304,14 @@ public class StudentFormController {
     private void clearFields() {
         txtName.clear();
         txtStId.clear();
-        txtGender.clear();
         txtAdvance.clear();
-        datePickerRegistrationDate.setValue(null);
         txtAddress.clear();
-        datePickerDob.setValue(null);
         txtContact.clear();
         txtEmail.clear();
-    }
-
+        datePickerDob.setValue(null);
+        datePickerRegistrationDate.setValue(null);
+        genderGroup.selectToggle(null);
+}
 
     public void btnClearOnAction(ActionEvent actionEvent) {
         clearFields();
