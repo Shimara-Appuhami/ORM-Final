@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import static javafx.application.Application.launch;
 
 public class Launcher extends Application {
     @Override
