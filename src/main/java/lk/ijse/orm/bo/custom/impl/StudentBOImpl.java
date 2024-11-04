@@ -44,20 +44,21 @@ public class StudentBOImpl implements StudentBO {
 
     public StudentDTO findByName(String name) {
         Student student = studentDAO.search(name);
-
-        return new StudentDTO(
-                student.getSt_id(),
-                student.getName(),
-                student.getAddress(),
-                student.getDob(),
-                student.getContact(),
-                student.getEmail(),
-                student.getGender(),
-                student.getRegistrationDate(),
-                student.getAdvance()
-        );
-    }
-
+        if (student != null) {
+            return new StudentDTO(
+                    student.getSt_id(),
+                    student.getName(),
+                    student.getAddress(),
+                    student.getDob(),
+                    student.getContact(),
+                    student.getEmail(),
+                    student.getGender(),
+                    student.getRegistrationDate(),
+                    student.getAdvance()
+            );
+        }
+        return null; // Return null if no student found
+}
 
 
 

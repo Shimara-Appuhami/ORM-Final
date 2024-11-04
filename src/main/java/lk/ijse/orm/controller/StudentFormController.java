@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 import lk.ijse.orm.dto.StudentDTO;
@@ -86,7 +87,11 @@ public class StudentFormController {
                 fillTextFields(newSelection);
             }
         });
-//        onSearchByName();
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                searchStudentByName();
+         }
+        });
     }
 
     private void loadTable(){
@@ -254,8 +259,26 @@ public class StudentFormController {
             e.printStackTrace();
         }
     }
-
-
+    private void searchStudentByName() {
+        String studentName = txtName.getText();
+        try {
+            StudentDTO student = studentBO.findByName(studentName);
+            ObservableList<StudentDTO> studentList = FXCollections.observableArrayList();
+            if (student != null) {
+                studentList.add(student); // Add only the found student
+                tblStudent.setItems(studentList); // Update the TableView
+                tblStudent.getSelectionModel().select(student); // Select the found student
+                fillTextFields(student); // Fill the fields with the student data
+            } else {
+                new Alert(Alert.AlertType.WARNING, "No student found with name: " + studentName).show();
+                clearFields(); // Optionally clear fields if no student is found
+                loadTable(); // Reload all students if no match
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error searching student: " + e.getMessage()).show();
+            e.printStackTrace();
+        }
+}
 //    private void onSearch() {
 //        public Student findById(String name) throws SQLException, ClassNotFoundException {
 //            Student student = studentBO.findByName(name);

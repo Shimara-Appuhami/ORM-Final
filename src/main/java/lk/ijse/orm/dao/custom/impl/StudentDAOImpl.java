@@ -24,6 +24,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     }
 
+
 //    @Override
 //    public Student findByName(String name) throws SQLException, ClassNotFoundException {
 //        Session session = FactoryConfiguration.getInstance().getSession();
@@ -70,12 +71,15 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public Student search(String name) {
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            return session.get(Student.class, name);
+            String hql = "FROM Student WHERE name = :name";
+            return session.createQuery(hql, Student.class)
+                    .setParameter("name", name)
+                    .uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-    }
+}
+}
 
 
 }
