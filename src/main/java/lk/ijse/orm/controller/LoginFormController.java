@@ -7,5 +7,6 @@ public class LoginFormController {
     public Button btnLogin;
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
+
     }
 }

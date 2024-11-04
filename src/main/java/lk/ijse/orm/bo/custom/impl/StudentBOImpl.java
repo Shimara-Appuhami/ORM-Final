@@ -1,10 +1,13 @@
 package lk.ijse.orm.bo.custom.impl;
 
 import lk.ijse.orm.bo.custom.StudentBO;
+import lk.ijse.orm.config.FactoryConfiguration;
+import lk.ijse.orm.dao.CrudDAO;
 import lk.ijse.orm.dao.DAOFactory;
 import lk.ijse.orm.dao.custom.StudentDAO;
 import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.entity.Student;
+import org.hibernate.Session;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +41,24 @@ public class StudentBOImpl implements StudentBO {
     public boolean deleteStudent(String id) throws SQLException, ClassNotFoundException {
         return studentDAO.delete(id);
     }
+
+    public StudentDTO findByName(String name) {
+        Student student = studentDAO.search(name);
+
+        return new StudentDTO(
+                student.getSt_id(),
+                student.getName(),
+                student.getAddress(),
+                student.getDob(),
+                student.getContact(),
+                student.getEmail(),
+                student.getGender(),
+                student.getRegistrationDate(),
+                student.getAdvance()
+        );
+    }
+
+
 
 
 }

@@ -22,15 +22,9 @@ public class StudentProgramDAOImpl implements StudentProgramDetailsDAO {
     public ArrayList<StudentProgramDetails> getAll() throws SQLException, ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
-        // Perform HQL query to retrieve all customers
         List<StudentProgramDetails> studentProgramDetails = session.createQuery("FROM StudentProgramDetails ", StudentProgramDetails.class).list();
-
-        // Commit the transaction and close the session
         transaction.commit();
         session.close();
-
-        // Convert List to ArrayList
         return new ArrayList<>(studentProgramDetails);
     }
 
@@ -55,7 +49,7 @@ public class StudentProgramDAOImpl implements StudentProgramDetailsDAO {
     }
 
     @Override
-    public StudentProgramDetails getById(int id) throws SQLException, ClassNotFoundException {
+    public StudentProgramDetails search(String name) {
         return null;
     }
 

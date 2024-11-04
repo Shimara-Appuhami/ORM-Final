@@ -27,30 +27,34 @@
     <TextField fx:id="txtContact" layoutX="148.0" layoutY="78.0" onAction="#txtContactOnAction" promptText="Enter contact" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
     <Label layoutX="70.0" layoutY="137.0" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <TextField fx:id="txtEmail" layoutX="148.0" layoutY="133.0" onAction="#txtEmailOnAction" promptText="Enter email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <TextField fx:id="txtEmail" layoutX="148.0" layoutY="129.0" onAction="#txtEmailOnAction" promptText="Enter email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
     <Label layoutX="65.0" layoutY="178.0" text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
 
     <Label layoutX="62.0" layoutY="212.0" text="Advance:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-    <TextField fx:id="txtAdvance" layoutX="148.0" layoutY="208.0" onAction="#txtAdvanceOnAction" promptText="Enter advance" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField fx:id="txtAdvance" layoutX="148.0" layoutY="204.0" onAction="#txtAdvanceOnAction" promptText="Enter advance" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
     <Label layoutX="43.0" layoutY="238.0" text="Registration Date:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
     <DatePicker fx:id="datePickerRegistrationDate" layoutX="148.0" layoutY="234.0" onAction="#datePickerRegistrationDateOnAction" promptText="Select registration date" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-    <Button fx:id="btnSubmit" layoutX="375.0" layoutY="221.0" onAction="#btnSubmitOnAction" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-   <TableView fx:id="tblStudent" layoutX="36.0" layoutY="273.0" prefHeight="98.0" prefWidth="539.0">
+    <Button fx:id="btnSubmit" layoutX="340.0" layoutY="225.0" onAction="#btnSubmitOnAction" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+   <TableView fx:id="tblStudent" layoutX="4.0" layoutY="273.0" prefHeight="98.0" prefWidth="573.0">
      <columns>
-       <TableColumn prefWidth="75.0" text="ID" />
-       <TableColumn prefWidth="75.0" text="Name" />
-         <TableColumn prefWidth="64.79998779296875" text="Address" />
-         <TableColumn prefWidth="64.0" text="Contact" />
-         <TableColumn prefWidth="51.20001220703125" text="Gender" />
-         <TableColumn prefWidth="65.5999755859375" text="Email" />
-         <TableColumn prefWidth="57.59991455078125" text="Birth" />
-         <TableColumn prefWidth="86.39996337890625" text="Date" />
+       <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+       <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+         <TableColumn fx:id="colAddress" prefWidth="64.79998779296875" text="Address" />
+         <TableColumn fx:id="colContact" prefWidth="64.0" text="Contact" />
+         <TableColumn fx:id="colGender" prefWidth="51.20001220703125" text="Gender" />
+         <TableColumn fx:id="colEmail" prefWidth="65.5999755859375" text="Email" />
+         <TableColumn fx:id="colBirth" prefWidth="57.59991455078125" text="Birth" />
+         <TableColumn fx:id="colDate" prefWidth="52.800018310546875" text="Date" />
+         <TableColumn fx:id="colAdvance" prefWidth="64.80001220703127" text="Advance" />
      </columns>
    </TableView>
-   <RadioButton fx:id="radioMale" layoutX="160.0" layoutY="178.0" mnemonicParsing="false" onAction="#radioMaleOnAction" text="Male" />
-   <RadioButton fx:id="radioFemale" layoutX="223.0" layoutY="178.0" mnemonicParsing="false" onAction="#radioFemaleOnAction" text="Female" />
+   <RadioButton fx:id="radioMale" toggleGroup="$genderGroup" layoutX="160.0" layoutY="178.0" mnemonicParsing="false" onAction="#radioMaleOnAction" text="Male" />
+   <RadioButton fx:id="radioFemale" toggleGroup="$genderGroup" layoutX="223.0" layoutY="178.0" mnemonicParsing="false" onAction="#radioFemaleOnAction" text="Female" />
+   <Button fx:id="btnUpdate" layoutX="398.0" layoutY="225.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" text="Update" />
+   <Button fx:id="btnDelete" layoutX="460.0" layoutY="225.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+   <Button fx:id="btnClear" layoutX="522.0" layoutY="225.0" mnemonicParsing="false" onAction="#btnClearOnAction" text="Clear" />
 
 </AnchorPane>

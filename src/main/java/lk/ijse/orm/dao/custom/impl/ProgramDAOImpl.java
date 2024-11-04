@@ -59,9 +59,10 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public Program getById(int id) throws SQLException, ClassNotFoundException {
+    public Program search(String name) {
         return null;
     }
+
 
     @Override
     public boolean save(String programId, String programName, String duration, double fee) {
