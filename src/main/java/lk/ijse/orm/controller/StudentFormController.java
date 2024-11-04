@@ -245,7 +245,7 @@ public class StudentFormController {
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully!").show();
-                initialize(); // Refresh table data
+                initialize();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Student not found with ID: " + stId).show();
             }

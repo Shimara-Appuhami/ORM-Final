@@ -149,7 +149,7 @@ public class ProgramFormController {
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Program deleted successfully!").show();
-                initialize(); // Refresh table data
+                initialize();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Program not found with ID: " + id).show();
             }
