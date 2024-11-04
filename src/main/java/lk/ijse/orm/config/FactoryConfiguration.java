@@ -1,6 +1,7 @@
 package lk.ijse.orm.config;
 
 
+
 import lk.ijse.orm.entity.Program;
 import lk.ijse.orm.entity.Student;
 import lk.ijse.orm.entity.StudentProgramDetails;
@@ -8,31 +9,34 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class FactoryConfiguration {
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
-    private static FactoryConfiguration factoryConfiguration;
+public class FactoryConfiguration {
+    private static FactoryConfiguration factoryConfiguration ;
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
+        Properties properties = new Properties();
         try {
-            Configuration configuration = new Configuration().configure()
-                    .addAnnotatedClass(Student.class)
-                    .addAnnotatedClass(Program.class)
-                    .addAnnotatedClass(StudentProgramDetails.class);
-
-            sessionFactory = configuration.buildSessionFactory();
-            System.out.println("SessionFactory initialized successfully.");
-        } catch (Exception e) {
-            System.err.println("Initial SessionFactory creation failed: " + e);
-            throw new ExceptionInInitializerError(e);
+            properties.load(new FileInputStream("src/hibernate.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        org.hibernate.cfg.Configuration configuration = new Configuration()
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Program.class)
+                .addAnnotatedClass(StudentProgramDetails.class);
+
+        configuration.setProperties(properties);
+        sessionFactory = configuration.buildSessionFactory();
     }
 
     public static FactoryConfiguration getInstance() {
-        if (factoryConfiguration == null) {
-            factoryConfiguration = new FactoryConfiguration();
-        }
-        return factoryConfiguration;
+        return (factoryConfiguration == null) ? factoryConfiguration = new FactoryConfiguration()
+                : factoryConfiguration;
     }
 
     public Session getSession() {
