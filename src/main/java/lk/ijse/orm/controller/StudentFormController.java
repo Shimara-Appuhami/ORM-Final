@@ -86,7 +86,7 @@ public class StudentFormController {
                 fillTextFields(newSelection);
             }
         });
-        onSearchByName();
+//        onSearchByName();
     }
 
     private void loadTable(){
@@ -114,6 +114,7 @@ public class StudentFormController {
         }
         datePickerRegistrationDate.setValue(LocalDate.parse(student.getRegistrationDate()));
         txtAdvance.setText(String.valueOf(student.getAdvance()));
+
     }
 //    public String getSelectedGender() {
 //        RadioButton selectedRadioButton = (RadioButton) genderGroup.getSelectedToggle();
@@ -274,31 +275,31 @@ public class StudentFormController {
 //            return null;
 //        }
 
-    private void onSearchByName() {
-        try {
-            String studentName = txtName.getText();
-            StudentDTO student=studentBO.findByName(studentName);
-
-            if (student != null) {
-                //                txtName.setText(student.getName());
-//                txtStId.setText(student.getSt_id());
-                txtGender.setText(student.getGender());
-                txtAdvance.setText(String.valueOf(student.getAdvance())); // Convert to String if needed
-                datePickerRegistrationDate.setValue(LocalDate.parse(student.getRegistrationDate()));
-                txtAddress.setText(student.getAddress());
-                datePickerDob.setValue(LocalDate.parse(student.getDob()));
-                txtContact.setText(student.getContact());
-                txtEmail.setText(student.getEmail());
-
-            } else {
-                new Alert(Alert.AlertType.WARNING, "No student found with name: " + studentName).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
+//    private void onSearchByName() {
+//        try {
+//            String studentName = txtName.getText();
+//            StudentDTO student=studentBO.findByName(studentName);
+//
+//            if (student != null) {
+//                //                txtName.setText(student.getName());
+////                txtStId.setText(student.getSt_id());
+//                txtGender.setText(student.getGender());
+//                txtAdvance.setText(String.valueOf(student.getAdvance())); // Convert to String if needed
+//                datePickerRegistrationDate.setValue(LocalDate.parse(student.getRegistrationDate()));
+//                txtAddress.setText(student.getAddress());
+//                datePickerDob.setValue(LocalDate.parse(student.getDob()));
+//                txtContact.setText(student.getContact());
+//                txtEmail.setText(student.getEmail());
+//
+//            } else {
+//                new Alert(Alert.AlertType.WARNING, "No student found with name: " + studentName).show();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
 
     private void clearFields() {
         txtName.clear();
