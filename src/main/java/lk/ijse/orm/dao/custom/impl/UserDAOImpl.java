@@ -2,12 +2,8 @@ package lk.ijse.orm.dao.custom.impl;
 
 import lk.ijse.orm.config.FactoryConfiguration;
 import lk.ijse.orm.dao.custom.UserDAO;
-import lk.ijse.orm.dto.UserDTO;
-import lk.ijse.orm.entity.Student;
 import lk.ijse.orm.entity.User;
-import lk.ijse.orm.util.Password;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -15,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lk.ijse.orm.util.Password.verifyPassword;
 
 public class UserDAOImpl implements UserDAO {
 

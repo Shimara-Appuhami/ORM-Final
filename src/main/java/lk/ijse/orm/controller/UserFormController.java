@@ -12,6 +12,7 @@ import lk.ijse.orm.bo.custom.UserBO;
 import lk.ijse.orm.dto.ProgramDTO;
 import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.dto.UserDTO;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -123,13 +124,15 @@ public class UserFormController {
             String password = txtPassword.getText();
             String possession=txtPossession.getText();
 
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
             if (id.isEmpty() || name.isEmpty() || password.isEmpty() || possession.isEmpty()) {
                 new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
                 return;
             }
 
 
-            UserDTO user = new UserDTO(id,name, password,possession);
+            UserDTO user = new UserDTO(id,name, hashedPassword,possession);
             userBO.addUser(user);
             initialize();
             new Alert(Alert.AlertType.INFORMATION, "Program added successfully").show();
@@ -146,12 +149,14 @@ public class UserFormController {
             String password = txtPassword.getText();
             String possession = txtPossession.getText();
 
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
             if (id.isEmpty() || name.isEmpty() || password.isEmpty() || possession.isEmpty()) {
                 new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
                 return;
             }
 
-            UserDTO user = new UserDTO(id, name, password, possession);
+            UserDTO user = new UserDTO(id, name, hashedPassword, possession);
             boolean isUpdated = userBO.updateUser(user);
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION, "User updated successfully").show();

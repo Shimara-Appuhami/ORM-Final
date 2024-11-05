@@ -4,19 +4,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.LoginFormController">
    <children>
-      <Button fx:id="btnLogin" layoutX="255.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="30.0" prefWidth="89.0" text="Login" />
-      <TextField fx:id="txtUsername" layoutX="226.0" layoutY="134.0" />
-      <PasswordField fx:id="txtPassword" layoutX="226.0" layoutY="200.0" />
+      <ImageView blendMode="MULTIPLY" fitHeight="400.0" fitWidth="600.0" opacity="0.83" AnchorPane.bottomAnchor="0.0">
+         <image>
+            <Image url="@../assets/img.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnLogin" layoutX="254.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="30.0" prefWidth="89.0" style="-fx-background-color: lightBlue;" text="Login">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Button>
+      <TextField fx:id="txtUsername" layoutX="224.0" layoutY="145.0" opacity="0.82" />
+      <PasswordField fx:id="txtPassword" layoutX="224.0" layoutY="200.0" opacity="0.82" />
       <TextField fx:id="txtPasswordVisible" layoutX="188.0" layoutY="200.0" prefHeight="36.0" prefWidth="222.0" promptText="enter your password here" visible="false" />
 
-      <Button fx:id="btnTogglePassword" layoutX="379.0" layoutY="200.0" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="46.0" style="-fx-text-fill: black; -fx-background-color: white;" text="Show" />
+      <Button fx:id="btnTogglePassword" layoutX="374.0" layoutY="200.0" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="46.0" style="-fx-text-fill: black; -fx-background-color: white;" text="Show" />
 
-      <Label layoutX="143.0" layoutY="138.0" text="USERNAME" />
-      <Label layoutX="143.0" layoutY="204.0" text="PASSWORD" />
+      <Label layoutX="155.0" layoutY="149.0" text="USERNAME">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="154.0" layoutY="204.0" text="PASSWORD">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
 
    </children>
 </AnchorPane>

@@ -32,8 +32,11 @@ public class DashboardController {
     private AnchorPane mainContent;
 
     @FXML
-    void logout(ActionEvent event) {
+    void logout(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login-form.fxml"));
+        AnchorPane pane = loader.load();
 
+        mainContent.getChildren().setAll(pane);
     }
 
     @FXML

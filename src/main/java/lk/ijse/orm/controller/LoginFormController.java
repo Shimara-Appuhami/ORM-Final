@@ -16,11 +16,11 @@ import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 import lk.ijse.orm.bo.custom.impl.UserBOImpl;
 import lk.ijse.orm.dto.UserDTO;
 import lk.ijse.orm.entity.User;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
-import static lk.ijse.orm.util.Password.verifyPassword;
+//import static lk.ijse.orm.util.Password.verifyPassword;
 
 public class LoginFormController {
     public Button btnLogin;
@@ -35,38 +35,44 @@ public class LoginFormController {
     @FXML
     public void btnLoginOnAction(ActionEvent actionEvent) {
         String username = txtUsername.getText();
-            String password = getPassword();
+        String password = getPassword();
 
-            try {
-                UserDTO user = userBO.findPositionByUserName(username);
-                if (user != null && verifyPassword(password, user.getPassword())) {
-                    showAlert("Login Successful", "Welcome, " + username + "!");
-                    UserDTO position = userBOImpl.findPositionByUserName(username);
-                    if (position != null) {
-                        switch (position.getPossession().toLowerCase()) {
-                            case "admin":
-                                admin();
-                                break;
-                            case "coordinator":
-                                coordinator();
-                                break;
-                            case "lecture":
-                                lecture();
-                                break;
-                            default:
-                                showAlert("Access Denied", "You do not have permission to access the dashboard.");
-                        }
-                    } else {
-                        showAlert("Login Failed", "User does not exist.");
+        try {
+            UserDTO user = userBO.findPositionByUserName(username);
+            if (user != null && verifyPassword(password, user.getPassword())) {
+                showAlert("Login Successful", "Welcome, " + username + "!");
+                UserDTO position = userBOImpl.findPositionByUserName(username);
+                if (position != null) {
+                    switch (position.getPossession().toLowerCase()) {
+                        case "admin":
+                            admin();
+                            break;
+                        case "coordinator":
+                            coordinator();
+                            break;
+                        case "lecture":
+                            lecture();
+                            break;
+                        default:
+                            showAlert("Access Denied", "You do not have permission to access the dashboard.");
                     }
                 } else {
-                    showAlert("Login Failed", "Incorrect password or username.");
+                    showAlert("Login Failed", "User does not exist.");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();  // Print the full stack trace to the console for debugging
-                showAlert("Error", "An error occurred during login. Please check your credentials and try again.");
+            } else {
+                showAlert("Login Failed", "Incorrect password or username.");
             }
+        } catch (Exception e) {
+            e.printStackTrace();  // Print the full stack trace to the console for debugging
+            showAlert("Error", "An error occurred during login. Please check your credentials and try again.");
+        }
 
+    }
+    private boolean verifyPassword(String plainPassword, String hashedPassword) {
+        if (hashedPassword == null || !hashedPassword.startsWith("$2a$") && !hashedPassword.startsWith("$2b$") && !hashedPassword.startsWith("$2y$")) {
+            throw new IllegalArgumentException("Invalid hashed password format");
+        }
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 
     private void showAlert(String title, String message) {

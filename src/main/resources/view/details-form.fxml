@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.DetailsFormController">
+<AnchorPane prefHeight="786.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.DetailsFormController">
    <children>
-      <TableView fx:id="tblDetail" layoutX="142.0" layoutY="89.0" prefHeight="200.0" prefWidth="377.0">
+      <TableView fx:id="tblDetail" layoutX="85.0" layoutY="342.0" prefHeight="200.0" prefWidth="468.0">
         <columns>
-          <TableColumn fx:id="colStudentId" prefWidth="75.0" text="Student ID" />
-          <TableColumn fx:id="colCourseId" prefWidth="75.0" text="Course ID" />
-            <TableColumn fx:id="colPayment" prefWidth="96.800048828125" text="Payment" />
-            <TableColumn fx:id="colRegistrationDate" prefWidth="129.59991455078125" text="Registration Date" />
+          <TableColumn fx:id="colStudentId" prefWidth="99.20001983642578" text="Student ID" />
+          <TableColumn fx:id="colCourseId" prefWidth="96.79998779296875" text="Course ID" />
+            <TableColumn fx:id="colPayment" prefWidth="106.4000244140625" text="Payment" />
+            <TableColumn fx:id="colRegistrationDate" prefWidth="163.19998168945312" text="Registration Date" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearch" layoutX="142.0" layoutY="31.0" />
-      <Button fx:id="btnSearch" layoutX="323.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnSearchOnAction" text="Search" />
+      <TextField fx:id="txtSearch" layoutX="210.0" layoutY="294.0" />
+      <Button fx:id="btnSearch" layoutX="370.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnSearchOnAction" text="Search" />
+      <Label layoutX="195.0" layoutY="52.0" text="STUDENT DETAILS">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="156.0" fitWidth="185.0" layoutX="217.0" layoutY="107.0">
+         <image>
+            <Image url="@../assets/img_2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
