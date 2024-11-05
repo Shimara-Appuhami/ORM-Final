@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="lk.ijse.orm.controller.DashboardLectureController"
+            prefHeight="400.0" prefWidth="600.0">
+
+        <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #2E3B4E;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px;" text="Dashboard" />
+
+            <!-- Navigation Buttons -->
+
+
+            <VBox />
+            <Button fx:id="btnStudentProgramDetail" onAction="#openStudentDetails" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Student Details" />
+
+            <Button fx:id="btnLogout" onAction="#logout" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Logout" />
+        </VBox>
+
+        <AnchorPane fx:id="mainContent" style="-fx-background-color: #F4F4F9;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <AnchorPane prefHeight="400.0" prefWidth="450.0">
+                    <children>
+                        <Label fx:id="lblWelcome" layoutX="75.0" layoutY="38.0" prefHeight="35.0" prefWidth="306.0" style="-fx-font-size: 24px; -fx-text-fill: #2E3B4E;" text="Welcome to the Dashboard" />
+                    </children></AnchorPane>
+            </children>
+        </AnchorPane>
+
+
+</AnchorPane>

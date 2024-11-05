@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface UserBO extends SuperBo {
+
+
+
+
     UserDTO findUserByUsernameAndPassword(String username, String password);
     boolean addUser(UserDTO dto) throws SQLException, ClassNotFoundException;
     ArrayList<UserDTO> getAllUsers() throws SQLException, ClassNotFoundException;

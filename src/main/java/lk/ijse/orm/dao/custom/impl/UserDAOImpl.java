@@ -9,6 +9,7 @@ import lk.ijse.orm.util.Password;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,5 +65,17 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User search(String name) {
         return null;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
+            query.setParameter("username", username);
+            return query.uniqueResult(); // Returns a single result or null
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

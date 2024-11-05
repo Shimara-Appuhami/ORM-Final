@@ -5,4 +5,5 @@ import lk.ijse.orm.dto.UserDTO;
 import lk.ijse.orm.entity.User;
 
 public interface UserDAO extends CrudDAO<User> {
+    User findByUsername(String username);
 }

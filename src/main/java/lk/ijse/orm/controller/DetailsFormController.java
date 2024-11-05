@@ -9,10 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.StudentProgramBO;
-import lk.ijse.orm.bo.custom.UserBO;
-import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.dto.StudentProgramDetailsDTO;
-import lk.ijse.orm.dto.UserDTO;
 
 public class DetailsFormController {
 
@@ -51,7 +48,7 @@ public class DetailsFormController {
 
         txtSearch.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                searchDetailByName();
+               loadTable();
             }
         });
     }

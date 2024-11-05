@@ -61,4 +61,13 @@ public class UserBOImpl implements UserBO {
         }
         return null;
     }
+
+    public UserDTO findPositionByUserName(String username) {
+        User User = userDAO.findByUsername(username);
+        if (User != null) {
+            return new UserDTO(User.getUserId(), User.getUsername(), User.getPassword(), User.getPossession());
+        }
+        return null;
+    }
+
 }
