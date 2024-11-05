@@ -15,7 +15,7 @@ public interface UserBO extends SuperBo {
 
 
 
-    UserDTO findUserByUsernameAndPassword(String username, String password);
+    public UserDTO findPositionByUserName(String username) ;
     boolean addUser(UserDTO dto) throws SQLException, ClassNotFoundException;
     ArrayList<UserDTO> getAllUsers() throws SQLException, ClassNotFoundException;
     boolean updateUser(UserDTO dto) throws SQLException, ClassNotFoundException;

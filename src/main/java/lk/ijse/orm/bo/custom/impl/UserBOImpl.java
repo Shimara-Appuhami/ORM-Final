@@ -12,14 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
+
 public class UserBOImpl implements UserBO {
      UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
 
-    @Override
-    public UserDTO findUserByUsernameAndPassword(String username, String password) {
-        return null;
-    }
+
 
     @Override
     public boolean addUser(UserDTO dto) throws SQLException, ClassNotFoundException {
@@ -62,12 +61,19 @@ public class UserBOImpl implements UserBO {
         return null;
     }
 
+    @Override
     public UserDTO findPositionByUserName(String username) {
-        User User = userDAO.findByUsername(username);
-        if (User != null) {
-            return new UserDTO(User.getUserId(), User.getUsername(), User.getPassword(), User.getPossession());
+        // Retrieve user by username
+        User user = userDAO.findByUsername(username);
+
+        // If user exists, return UserDTO with user's details
+        if (user != null) {
+            return new UserDTO(user.getUserId(), user.getUsername(), user.getPassword(), user.getPossession());
+        } else {
+            // Optional: Add logging if user is not found for debugging purposes
+            return null;
         }
-        return null;
     }
+
 
 }
