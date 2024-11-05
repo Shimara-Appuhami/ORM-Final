@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.DashboardController">
+
+    <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #2E3B4E;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+        <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px;" text="Dashboard" />
+
+        <!-- Navigation Buttons -->
+        <Button fx:id="btnStudentManagement" onAction="#openStudentManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Student Management" />
+        <Button fx:id="btnProgramManagement" onAction="#openProgramManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Program Management" />
+        <Button fx:id="btnUserManagement" onAction="#openUserManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" text="User Management" />
+
+        <VBox />
+      <Button fx:id="btnStudentProgramDetail" onAction="#openStudentDetails" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Student Details" />
+   
+        <Button fx:id="btnLogout" onAction="#logout" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Logout" />
+    </VBox>
+
+    <AnchorPane fx:id="mainContent" style="-fx-background-color: #F4F4F9;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+      <children>
+         <AnchorPane prefHeight="400.0" prefWidth="450.0">
+            <children>
+                 <Label fx:id="lblWelcome" layoutX="75.0" layoutY="38.0" prefHeight="35.0" prefWidth="306.0" style="-fx-font-size: 24px; -fx-text-fill: #2E3B4E;" text="Welcome to the Dashboard" />
+            </children></AnchorPane>
+      </children>
+    </AnchorPane>
+
+</AnchorPane>

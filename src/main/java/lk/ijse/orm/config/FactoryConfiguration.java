@@ -5,6 +5,7 @@ package lk.ijse.orm.config;
 import lk.ijse.orm.entity.Program;
 import lk.ijse.orm.entity.Student;
 import lk.ijse.orm.entity.StudentProgramDetails;
+import lk.ijse.orm.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,6 +27,7 @@ public class FactoryConfiguration {
         }
 
         org.hibernate.cfg.Configuration configuration = new Configuration()
+                .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Program.class)
                 .addAnnotatedClass(StudentProgramDetails.class);

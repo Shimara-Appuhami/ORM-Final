@@ -38,4 +38,19 @@ public class ProgramBOImpl implements ProgramBO {
     public boolean updateProgram(ProgramDTO dto) throws Exception {
         return programDAO.update(new Program(dto.getProgram_id(),dto.getProgram_name(),dto.getDuration(),dto.getFee()));
     }
+
+    @Override
+    public ProgramDTO findByName(String programName) {
+        try {
+            Program program = programDAO.findByName(programName);
+            if (program != null) {
+                return new ProgramDTO(program.getProgram_id(), program.getProgram_name(), program.getDuration(), program.getFee());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

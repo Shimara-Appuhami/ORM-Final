@@ -6,7 +6,7 @@ import lk.ijse.orm.entity.Program;
 import lk.ijse.orm.entity.Student;
 
 public interface ProgramDAO extends CrudDAO<Program> {
-//    boolean save(String programId, String programName, String duration, double fee);
-//
-//    boolean update(String programId, String programName, String duration, double fee);
+    Program findByName(String programName)throws Exception;
+    public Program findById(String programId);
+
 }

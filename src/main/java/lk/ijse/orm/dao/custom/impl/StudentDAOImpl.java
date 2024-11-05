@@ -15,11 +15,11 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public boolean save(Student entity) {
 
-            Session session = FactoryConfiguration.getInstance().getSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(entity);
-            transaction.commit();
-            return true;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(entity);
+        transaction.commit();
+        return true;
 
 
     }
@@ -78,8 +78,8 @@ public class StudentDAOImpl implements StudentDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-}
-}
+        }
+    }
 
 
 }
