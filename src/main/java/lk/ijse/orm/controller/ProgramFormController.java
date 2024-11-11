@@ -54,7 +54,9 @@ public class ProgramFormController {
                 fillTextFields((ProgramDTO) newSelection);
             }
         });
-//        onSearchByName();
+
+        String nextId = programBO.getNextId();
+        txtProgramId.setText(nextId);
     }
     private void loadTable(){
         ObservableList<ProgramDTO> programList= FXCollections.observableArrayList();

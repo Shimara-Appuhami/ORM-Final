@@ -2,7 +2,6 @@ package lk.ijse.orm.bo.custom.impl;
 
 import lk.ijse.orm.bo.custom.StudentBO;
 import lk.ijse.orm.config.FactoryConfiguration;
-import lk.ijse.orm.dao.CrudDAO;
 import lk.ijse.orm.dao.DAOFactory;
 import lk.ijse.orm.dao.custom.ProgramDAO;
 import lk.ijse.orm.dao.custom.StudentDAO;
@@ -21,9 +20,10 @@ import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
 
-    StudentDAO studentDAO= (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
-    ProgramDAO programDAO= (ProgramDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PROGRAM);
-    StudentProgramDetailsDAO studentProgramDetailsDAO= (StudentProgramDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT_PROGRAM_DETAILS);
+    StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
+    ProgramDAO programDAO = (ProgramDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PROGRAM);
+    StudentProgramDetailsDAO studentProgramDetailsDAO = (StudentProgramDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT_PROGRAM_DETAILS);
+
     @Override
     public boolean addStudent(StudentDTO dto, List<StudentProgramDetailsDTO> programDetails) throws SQLException, ClassNotFoundException {
         Session session = null;
@@ -71,13 +71,12 @@ public class StudentBOImpl implements StudentBO {
     }
 
 
-
     @Override
     public ArrayList<StudentDTO> getAllStudent() throws SQLException, ClassNotFoundException {
         ArrayList<Student> students = (ArrayList<Student>) studentDAO.getAll();
         ArrayList<StudentDTO> studentDTOS = new ArrayList<>();
         for (Student dto : students) {
-            StudentDTO studentDTO = new StudentDTO(dto.getSt_id(),dto.getName(),dto.getAddress(),dto.getDob(),dto.getContact(),dto.getEmail(),dto.getGender(),dto.getRegistrationDate(),dto.getAdvance());
+            StudentDTO studentDTO = new StudentDTO(dto.getSt_id(), dto.getName(), dto.getAddress(), dto.getDob(), dto.getContact(), dto.getEmail(), dto.getGender(), dto.getRegistrationDate(), dto.getAdvance());
 
             studentDTOS.add(studentDTO);
         }
@@ -86,7 +85,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean updateStudent(StudentDTO dto) throws SQLException, ClassNotFoundException {
-        return studentDAO.update(new Student(dto.getSt_id(),dto.getName(),dto.getAddress(),dto.getDob(),dto.getContact(),dto.getEmail(),dto.getGender(),dto.getRegistrationDate(),dto.getAdvance()));
+        return studentDAO.update(new Student(dto.getSt_id(), dto.getName(), dto.getAddress(), dto.getDob(), dto.getContact(), dto.getEmail(), dto.getGender(), dto.getRegistrationDate(), dto.getAdvance()));
     }
 
     @Override
@@ -109,9 +108,23 @@ public class StudentBOImpl implements StudentBO {
                     student.getAdvance()
             );
         }
-        return null; // Return null if no student found
+        return null;
     }
 
+    @Override
+    public Student findById(String id) {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            return session.get(Student.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String getNextId() {
+        return studentDAO.getNextId();
+    }
 
 
 }

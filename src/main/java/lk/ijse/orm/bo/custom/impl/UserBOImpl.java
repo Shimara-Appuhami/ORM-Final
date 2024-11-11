@@ -74,6 +74,10 @@ public class UserBOImpl implements UserBO {
             return null;
         }
     }
+    @Override
+    public String getNextId() {
+        return userDAO.getNextId();
+    }
 
 
 }

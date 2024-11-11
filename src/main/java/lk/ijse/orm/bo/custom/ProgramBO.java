@@ -12,4 +12,5 @@ public interface ProgramBO extends SuperBo {
     public boolean updateProgram(ProgramDTO dto) throws Exception;
 
     ProgramDTO findByName(String programName)throws Exception ;
+    public String getNextId();
 }

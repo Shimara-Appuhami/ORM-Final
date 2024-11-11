@@ -9,6 +9,8 @@ import java.sql.SQLException;
 public interface StudentDAO extends CrudDAO<Student> {
 
     boolean save(Student entity);
+    Student generateNextId(String id);
 
+    String getNextId();
 }
 

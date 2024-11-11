@@ -79,6 +79,9 @@ public class UserFormController {
                 searchStudentByName();
             }
         });
+
+        String nextId = userBO.getNextId();
+        txtUserId.setText(nextId);
     }
     private void loadTable() {
         try {

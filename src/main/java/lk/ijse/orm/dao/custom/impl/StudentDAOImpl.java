@@ -5,6 +5,8 @@ import lk.ijse.orm.config.FactoryConfiguration;
 import lk.ijse.orm.dao.custom.StudentDAO;
 import lk.ijse.orm.entity.Student;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,49 @@ public class StudentDAOImpl implements StudentDAO {
 
 
     }
+
+    @Override
+    public Student generateNextId(String id) {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            // Use an HQL query to find the next student where ID is greater than the given ID
+            String hql = "FROM Student s WHERE s.st_id > :id ORDER BY s.st_id ASC";
+            return session.createQuery(hql, Student.class)
+                    .setParameter("id", id)
+                    .setMaxResults(1)  // Limit to one result to get only the next student
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String getNextId() {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            // Query to get the maximum numeric ID from the table
+            Query<String> query = session.createQuery("SELECT MAX(st_id) FROM Student", String.class);
+            String maxIdStr = query.uniqueResult();
+
+            transaction.commit();
+            session.close();
+
+            if (maxIdStr != null) {
+                // Parse maxIdStr to integer and increment it
+                int nextId = Integer.parseInt(maxIdStr) + 1;
+                return String.valueOf(nextId); // Convert back to String
+            } else {
+                // If no records exist, start with "1"
+                return "1";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "1"; // Default to "1" in case of an error
+        }
+    }
+
+
 
 
 //    @Override

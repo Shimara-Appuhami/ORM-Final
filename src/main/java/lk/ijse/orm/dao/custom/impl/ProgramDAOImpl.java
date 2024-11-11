@@ -85,6 +85,31 @@ public class ProgramDAOImpl implements ProgramDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         return session.get(Program.class, programId); // Assuming programId is the primary key
     }
+    @Override
+    public String getNextId() {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            // Query to get the maximum numeric ID from the table
+            Query<String> query = session.createQuery("SELECT MAX(program_id) FROM Program ", String.class);
+            String maxIdStr = query.uniqueResult();
+
+            transaction.commit();
+            session.close();
+
+            if (maxIdStr != null) {
+                // Parse maxIdStr to integer and increment it
+                int nextId = Integer.parseInt(maxIdStr) + 1;
+                return String.valueOf(nextId); // Convert back to String
+            } else {
+                // If no records exist, start with "1"
+                return "1";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "1"; // Default to "1" in case of an error
+        }
+    }
 
 
 }

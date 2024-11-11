@@ -101,6 +101,7 @@ public class LoginFormController {
         Stage stage = (Stage) this.btnLogin.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle(title);
+        stage.centerOnScreen();
         stage.show();
     }
 

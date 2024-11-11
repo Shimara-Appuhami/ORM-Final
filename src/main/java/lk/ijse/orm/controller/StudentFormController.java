@@ -14,6 +14,7 @@ import lk.ijse.orm.dto.ProgramDTO;
 import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.dto.StudentProgramDetailsDTO;
 import lk.ijse.orm.entity.Program;
+import lk.ijse.orm.entity.Student;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -80,6 +81,9 @@ public class StudentFormController {
         colDate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
         colAdvance.setCellValueFactory(new PropertyValueFactory<>("advance"));
 
+        String nextId = studentBO.getNextId();
+        txtStId.setText(nextId);
+
         loadPrograms();
         loadTable();
 
@@ -96,6 +100,7 @@ public class StudentFormController {
         });
         lsProgram.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         updateSelectedCoursesLabel();
+
     }
     private void updateSelectedCoursesLabel() {
         ObservableList<String> selectedPrograms = lsProgram.getSelectionModel().getSelectedItems();
@@ -304,5 +309,30 @@ public class StudentFormController {
         alert.setHeaderText(null); // Optional: Set a header if needed
         alert.showAndWait(); // Use showAndWait to block until the alert is closed
     }
+//    public void nextIDs() {
+//        String id = txtStId.getText().trim();
+//        if (id.isEmpty()) {
+//            return;
+//        }
+//
+//        try {
+//            // Use findByNextId to get the next student in sequence
+//            Student nextStudent = studentBO.findById(id);
+//
+//            if (nextStudent != null) {
+//                // Set the next student ID in the txtStId field
+//                txtStId.setText(nextStudent.getSt_id());
+//
+//                // Display the next student's details in the labels
+//
+//            } else {
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+
 
 }

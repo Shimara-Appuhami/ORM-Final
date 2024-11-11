@@ -21,4 +21,5 @@ public interface UserBO extends SuperBo {
     boolean updateUser(UserDTO dto) throws SQLException, ClassNotFoundException;
     boolean deleteUser(int userId) throws SQLException, ClassNotFoundException;
     UserDTO findUsername(String username) throws SQLException, ClassNotFoundException;
+    String getNextId();
 }

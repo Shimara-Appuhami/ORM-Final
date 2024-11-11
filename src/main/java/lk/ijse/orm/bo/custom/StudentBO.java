@@ -15,6 +15,8 @@ public interface StudentBO extends SuperBo {
     public boolean updateStudent(StudentDTO dto) throws SQLException, ClassNotFoundException;
     public boolean deleteStudent(String id) throws SQLException, ClassNotFoundException;
     StudentDTO findByName(String name) throws SQLException, ClassNotFoundException;
+    public Student findById(String id);
 
 
+    String getNextId();
 }

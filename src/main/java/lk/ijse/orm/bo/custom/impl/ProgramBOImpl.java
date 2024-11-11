@@ -51,6 +51,10 @@ public class ProgramBOImpl implements ProgramBO {
         }
         return null;
     }
+    @Override
+    public String getNextId() {
+        return programDAO.getNextId();
+    }
 
 
 }
