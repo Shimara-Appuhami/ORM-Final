@@ -14,5 +14,7 @@ public interface StudentDAO extends CrudDAO<Student> {
     String getNextId();
 
     boolean delete(String id, Session session);
+
+    int getStudentCount();
 }
 

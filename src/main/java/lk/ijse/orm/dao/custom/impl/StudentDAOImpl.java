@@ -73,6 +73,18 @@ public class StudentDAOImpl implements StudentDAO {
         return true;
     }
 
+    @Override
+    public int getStudentCount() {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            String hql = "SELECT COUNT(s) FROM Student s";
+            Long count = (Long) session.createQuery(hql).uniqueResult();
+            return count != null ? count.intValue() : 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 
 //    @Override
 //    public Student findByName(String name) throws SQLException, ClassNotFoundException {

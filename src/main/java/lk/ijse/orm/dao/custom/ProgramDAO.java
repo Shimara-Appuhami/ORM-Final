@@ -9,4 +9,6 @@ public interface ProgramDAO extends CrudDAO<Program> {
     Program findByName(String programName)throws Exception;
     public Program findById(String programId);
     String getNextId();
+
+    int getProgramCount();
 }

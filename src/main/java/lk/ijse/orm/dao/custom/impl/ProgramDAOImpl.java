@@ -111,5 +111,24 @@ public class ProgramDAOImpl implements ProgramDAO {
         }
     }
 
+    @Override
+    public int getProgramCount() {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            // Query to get the total number of records in the table
+            Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Program ", Long.class);
+            long count = query.uniqueResult();
+
+            transaction.commit();
+            session.close();
+
+            return (int) count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // Default to 0 in case of an error
+        }
+    }
+
 
 }

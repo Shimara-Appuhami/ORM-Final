@@ -34,7 +34,6 @@ public class DetailsFormController {
     StudentProgramBO studentProgramBO= (StudentProgramBO) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.STUDENTPROGRAMDETAILS);
 
     public void initialize() {
-        // Set up cell value factories
         colStudentId.setCellValueFactory(new PropertyValueFactory<>("st_id"));
         colCourseId.setCellValueFactory(new PropertyValueFactory<>("program_id"));
         colPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));

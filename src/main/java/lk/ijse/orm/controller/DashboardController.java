@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.orm.bo.BoFactory;
+import lk.ijse.orm.bo.custom.impl.ProgramBOImpl;
+import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 
 import java.io.IOException;
 
@@ -17,6 +20,8 @@ public class DashboardController {
 
     public Button btnStudentProgramDetail;
     public Button txtDashboard;
+    public Label txtStudentCount;
+    public Label txtProgramsCount;
 
     @FXML
     private Button btnLogout;
@@ -35,10 +40,14 @@ public class DashboardController {
 
     @FXML
     private AnchorPane mainContent;
+    StudentBOImpl studentBO = (StudentBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.STUDENT);
+    ProgramBOImpl programBO = (ProgramBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.PROGRAM);
 
     public void initialize() {
-
+       loadStudentCount();
+       loadProgramCount();
     }
+
     @FXML
     void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login-form.fxml"));
@@ -98,10 +107,8 @@ public class DashboardController {
     }
 
 
-
     public void txtDashboardOnAction(ActionEvent actionEvent) {
         try {
-            // Load the Dashboard FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard.fxml"));
             AnchorPane pane = loader.load();
 
@@ -112,7 +119,6 @@ public class DashboardController {
             newStage.setTitle("Dashboard");
             newStage.show();
 
-            // Close the current window
             Stage currentStage = (Stage) txtDashboard.getScene().getWindow();
             currentStage.close();
 
@@ -120,5 +126,24 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    private void loadStudentCount() {
+        try {
+            int count = studentBO.getStudentCount();
+            txtStudentCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtStudentCount.setText("Error");
+        }
     }
+    private void loadProgramCount() {
+        try {
+            int count = programBO.getProgramCount();
+            txtProgramsCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtProgramsCount.setText("Error");
+        }
+    }
+}
 

@@ -158,4 +158,7 @@ public class StudentBOImpl implements StudentBO {
     }
 
 
+    public int getStudentCount() {
+        return studentDAO.getStudentCount();
+    }
 }

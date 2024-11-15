@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.orm.bo.BoFactory;
+import lk.ijse.orm.bo.custom.impl.ProgramBOImpl;
+import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 
 import java.io.IOException;
 
@@ -17,6 +20,8 @@ public class DashboardCoordinatorController {
 
     public Button btnStudentProgramDetail;
     public Button txtDashboard;
+    public Label txtProgramsCount;
+    public Label txtStudentCount;
     @FXML
     private Button btnLogout;
 
@@ -35,6 +40,13 @@ public class DashboardCoordinatorController {
     @FXML
     private AnchorPane mainContent;
 
+    StudentBOImpl studentBO = (StudentBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.STUDENT);
+    ProgramBOImpl programBO = (ProgramBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.PROGRAM);
+
+    public void initialize(){
+        loadStudentCount();
+        loadProgramCount();
+    }
     @FXML
     void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login-form.fxml"));
@@ -83,9 +95,26 @@ public class DashboardCoordinatorController {
         newStage.setTitle("Dashboard");
         newStage.show();
 
-        // Close the current window
         Stage currentStage = (Stage) txtDashboard.getScene().getWindow();
         currentStage.close();
 
+    }
+    private void loadStudentCount() {
+        try {
+            int count = studentBO.getStudentCount();
+            txtStudentCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtStudentCount.setText("Error");
+        }
+    }
+    private void loadProgramCount() {
+        try {
+            int count = programBO.getProgramCount();
+            txtProgramsCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtProgramsCount.setText("Error");
+        }
     }
 }

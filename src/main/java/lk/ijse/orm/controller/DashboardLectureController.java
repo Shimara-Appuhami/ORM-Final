@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.orm.bo.BoFactory;
+import lk.ijse.orm.bo.custom.impl.ProgramBOImpl;
+import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 
 import java.io.IOException;
 
@@ -17,6 +20,8 @@ public class DashboardLectureController {
 
     public Button btnStudentProgramDetail;
     public Button txtDashboard;
+    public Label txtProgramsCount;
+    public Label txtStudentCount;
 
     @FXML
     private Button btnLogout;
@@ -36,20 +41,24 @@ public class DashboardLectureController {
     @FXML
     private AnchorPane mainContent;
 
+    StudentBOImpl studentBO = (StudentBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.STUDENT);
+    ProgramBOImpl programBO = (ProgramBOImpl) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.PROGRAM);
+
+    public void initialize(){
+        loadStudentCount();
+        loadProgramCount();
+    }
     @FXML
     void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login-form.fxml"));
         AnchorPane pane = loader.load();
 
-        // Create a new scene with the loaded pane
         Scene scene = new Scene(pane);
 
-        // Create a new stage (window) and set the scene
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Login"); // Set the title of the new window
+        stage.setTitle("Login");
         stage.show();
-        // Close the current window
         ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
     }
 
@@ -65,15 +74,31 @@ public class DashboardLectureController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard-lecture.fxml"));
         AnchorPane pane = loader.load();
 
-        // Create a new Scene and Stage for the Dashboard
         Scene scene = new Scene(pane);
         Stage newStage = new Stage();
         newStage.setScene(scene);
         newStage.setTitle("Dashboard");
         newStage.show();
 
-        // Close the current window
         Stage currentStage = (Stage) txtDashboard.getScene().getWindow();
         currentStage.close();
+    }
+    private void loadStudentCount() {
+        try {
+            int count = studentBO.getStudentCount();
+            txtStudentCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtStudentCount.setText("Error");
+        }
+    }
+    private void loadProgramCount() {
+        try {
+            int count = programBO.getProgramCount();
+            txtProgramsCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtProgramsCount.setText("Error");
+        }
     }
 }

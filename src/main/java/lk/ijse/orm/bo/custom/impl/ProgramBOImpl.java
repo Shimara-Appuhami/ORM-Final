@@ -57,4 +57,7 @@ public class ProgramBOImpl implements ProgramBO {
     }
 
 
+    public int getProgramCount() {
+        return programDAO.getProgramCount();
+    }
 }
