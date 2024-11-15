@@ -32,37 +32,32 @@ public class StudentBOImpl implements StudentBO {
             session = FactoryConfiguration.getInstance().getSession();
             transaction = session.beginTransaction();
 
-            // Create Student entity
             Student student = new Student(dto.getSt_id(), dto.getName(), dto.getAddress(), dto.getDob(),
                     dto.getContact(), dto.getEmail(), dto.getGender(),
                     dto.getRegistrationDate(), dto.getAdvance());
 
-            // Save Student entity
             studentDAO.save(student);
 
-            // Save associated StudentProgramDetails
             for (StudentProgramDetailsDTO details : programDetails) {
                 StudentProgramDetails studentProgramDetails = new StudentProgramDetails();
                 studentProgramDetails.setStudent(student); // Set the saved student
                 studentProgramDetails.setPayment(Double.parseDouble(details.getPayment())); // Convert and set payment
                 studentProgramDetails.setRegistrationDate(details.getRegistrationDate());
 
-                // Fetch the Program entity using the program ID
-                Program program = programDAO.findById(details.getProgram_id()); // Assuming you have a programDAO to fetch the program
+                Program program = programDAO.findById(details.getProgram_id());
                 if (program != null) {
                     studentProgramDetails.setProgram(program); // Set the program entity
                 } else {
                     throw new Exception("Program not found with ID: " + details.getProgram_id());
                 }
 
-                // Save StudentProgramDetails
                 studentProgramDetailsDAO.save(studentProgramDetails);
             }
 
             transaction.commit();
             return true;
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback(); // Rollback in case of error
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
             return false;
         } finally {
@@ -90,7 +85,43 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean deleteStudent(String id) throws SQLException, ClassNotFoundException {
-        return studentDAO.delete(id);
+        Transaction transaction = null;
+        boolean isDeleted = false;
+
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            // Begin transaction
+            transaction = session.beginTransaction();
+
+            // Fetch associated StudentProgramDetails for the given student ID
+            List<StudentProgramDetails> details = studentProgramDetailsDAO.getStudentId(Integer.parseInt(id), session);
+
+            // Delete each associated StudentProgramDetails record
+            for (StudentProgramDetails detail : details) {
+                if (!studentProgramDetailsDAO.delete(detail.getStudent_program_id(), session)) {
+                    // If deleting a student program detail fails, rollback and return false
+                    transaction.rollback();
+                    return false;
+                }
+            }
+
+            // Now delete the student record
+            isDeleted = studentDAO.delete(id, session);
+            if (isDeleted) {
+                // Commit transaction if student and associated details are successfully deleted
+                transaction.commit();
+            } else {
+                // Rollback transaction if student deletion fails
+                transaction.rollback();
+            }
+        } catch (Exception e) {
+            // In case of an exception, rollback the transaction to maintain data integrity
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
+        return isDeleted;
     }
 
     public StudentDTO findByName(String name) {

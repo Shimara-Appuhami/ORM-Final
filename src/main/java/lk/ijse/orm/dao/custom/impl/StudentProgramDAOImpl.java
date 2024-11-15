@@ -59,4 +59,25 @@ public class StudentProgramDAOImpl implements StudentProgramDetailsDAO {
     }
 
 
+    @Override
+    public boolean delete(int studentProgramId, Session session) {
+         session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(studentProgramId);
+        transaction.commit();
+        session.close();
+        return false;
+    }
+
+    @Override
+    public List<StudentProgramDetails> getStudentId(int i, Session session) {
+        try {
+            return session.createQuery("FROM StudentProgramDetails sp WHERE sp.student.st_id = :st_id", StudentProgramDetails.class)
+                    .setParameter("st_id", i)
+                    .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
 }

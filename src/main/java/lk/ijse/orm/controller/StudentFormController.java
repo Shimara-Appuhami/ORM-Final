@@ -147,8 +147,6 @@ public class StudentFormController {
             showAlert("Error", "Invalid advance amount.");
             return;
         }
-
-        // Create a StudentDTO instance
         StudentDTO studentDTO = new StudentDTO(
                 txtStId.getText(),
                 name,
@@ -168,12 +166,11 @@ public class StudentFormController {
             try {
                 ProgramDTO programDTO = findProgramByName(programName);
                 if (programDTO != null) {
-                    // Create StudentProgramDetailsDTO and set the program ID
                     StudentProgramDetailsDTO details = new StudentProgramDetailsDTO();
-                    details.setProgram_id(programDTO.getProgram_id()); // Set the program ID
-                    details.setPayment(studentDTO.getAdvance()); // Set the payment per program
-                    details.setRegistrationDate(registrationDate.toString()); // Set registration date
-                    programDetails.add(details); // Add to the list
+                    details.setProgram_id(programDTO.getProgram_id());
+                    details.setPayment(studentDTO.getAdvance());
+                    details.setRegistrationDate(registrationDate.toString());
+                    programDetails.add(details);
                 } else {
                     showAlert("Warning", "Program not found: " + programName);
                 }
@@ -183,7 +180,6 @@ public class StudentFormController {
         }
 
         try {
-            // Attempt to save the student with associated program details
             if (studentBO.addStudent(studentDTO, programDetails)) {
                 loadTable();
                 clearFields();
@@ -195,9 +191,9 @@ public class StudentFormController {
     }
 
 
-    private Program convertToEntity(ProgramDTO programDTO) {
-        return new Program(programDTO.getProgram_id(), programDTO.getProgram_name(), programDTO.getDuration(), programDTO.getFee());
-    }
+//    private Program convertToEntity(ProgramDTO programDTO) {
+//        return new Program(programDTO.getProgram_id(), programDTO.getProgram_name(), programDTO.getDuration(), programDTO.getFee());
+//    }
 
 
 

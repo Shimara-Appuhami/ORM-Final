@@ -1,8 +1,8 @@
 package lk.ijse.orm.dao.custom;
 
-import com.mysql.cj.Session;
 import lk.ijse.orm.dao.CrudDAO;
 import lk.ijse.orm.entity.Student;
+import org.hibernate.Session;
 
 import java.sql.SQLException;
 
@@ -12,5 +12,7 @@ public interface StudentDAO extends CrudDAO<Student> {
     Student generateNextId(String id);
 
     String getNextId();
+
+    boolean delete(String id, Session session);
 }
 

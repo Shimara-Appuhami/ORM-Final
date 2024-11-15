@@ -1,0 +1,71 @@
+/* Root Background */
+.root {
+    -fx-background-color: #EFEFEF; /* Light gray background */
+}
+
+/* Sidebar Design */
+.vbox {
+    -fx-background-color: #1F2A44; /* Deep navy for the sidebar */
+    -fx-padding: 20px 0;
+    -fx-spacing: 12px;
+    -fx-alignment: center-left;
+}
+
+/* Sidebar Label */
+.vbox .label {
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 20px;
+}
+
+/* Sidebar Buttons */
+.vbox .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #B0BEC5; /* Light blue-gray */
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-alignment: center-left;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(176, 190, 197, 0.3); /* Subtle bottom border */
+}
+
+.vbox .button:hover {
+    -fx-background-color: #2E3B4E; /* Dark blue on hover */
+    -fx-text-fill: #FFFFFF; /* White text on hover */
+}
+
+/* Main Content Area */
+#mainContent {
+    -fx-background-color: #FFFFFF; /* White for main area */
+    -fx-padding: 20px;
+}
+
+/* Welcome Label */
+#lblWelcome {
+    -fx-font-size: 28px;
+    -fx-text-fill: #1F2A44; /* Deep navy for contrast */
+    -fx-font-family: "System Bold Italic";
+    -fx-padding: 0 0 20px 0;
+}
+
+/* Logout Button */
+#btnLogout {
+    -fx-text-fill: #FF5252; /* Red for logout button */
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 1px;
+    -fx-border-color: #FF5252; /* Border matches text */
+    -fx-alignment: center-left;
+}
+
+#btnLogout:hover {
+    -fx-background-color: #FFCDD2; /* Light red on hover */
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Image Styling */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 4); /* Subtle shadow for depth */
+    -fx-padding: 20px;
+}

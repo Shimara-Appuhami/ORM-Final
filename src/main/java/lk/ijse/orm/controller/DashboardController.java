@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,8 @@ public class DashboardController {
 
 
     public Button btnStudentProgramDetail;
+    public Button txtDashboard;
+
     @FXML
     private Button btnLogout;
 
@@ -33,6 +36,9 @@ public class DashboardController {
     @FXML
     private AnchorPane mainContent;
 
+    public void initialize() {
+
+    }
     @FXML
     void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login-form.fxml"));
@@ -49,6 +55,7 @@ public class DashboardController {
         // Close the current window
         ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
     }
+
 
     @FXML
     void openStudentProgramDetails(ActionEvent event) throws IOException {
@@ -89,4 +96,29 @@ public class DashboardController {
 
         mainContent.getChildren().setAll(pane);
     }
-}
+
+
+
+    public void txtDashboardOnAction(ActionEvent actionEvent) {
+        try {
+            // Load the Dashboard FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard.fxml"));
+            AnchorPane pane = loader.load();
+
+            // Create a new Scene and Stage for the Dashboard
+            Scene scene = new Scene(pane);
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+            newStage.setTitle("Dashboard");
+            newStage.show();
+
+            // Close the current window
+            Stage currentStage = (Stage) txtDashboard.getScene().getWindow();
+            currentStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
