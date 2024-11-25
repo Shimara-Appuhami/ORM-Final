@@ -9,44 +9,77 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="786.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.StudentFormController">
-    <Label layoutX="218.0" layoutY="52.0" text="STUDENT REGISTRATION">
+<AnchorPane prefHeight="786.0" prefWidth="618.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm.controller.StudentFormController">
+   <Pane layoutX="135.0" layoutY="15.0" prefHeight="60.0" prefWidth="474.0" style="-fx-background-color: #295F98;" />
+    <Pane layoutX="8.0" layoutY="106.0" prefHeight="363.0" prefWidth="697.0" style="-fx-background-color: #608BC1;" />
+
+    <Label layoutX="204.0" layoutY="30.0" text="STUDENT REGISTRATION" textFill="#ff4747">
         <font>
             <Font name="System Bold Italic" size="26.0" />
         </font>
     </Label>
-    <Label layoutX="56.0" layoutY="137.0" text="Student ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <TextField fx:id="txtStId" layoutX="136.0" layoutY="133.0" promptText="Enter student ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label layoutX="65.0" layoutY="137.0" text="Student ID:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Label>
+    <TextField fx:id="txtStId" layoutX="156.0" layoutY="133.0" promptText="Enter student ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-    <Label layoutX="68.0" layoutY="181.0" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <TextField fx:id="txtName" layoutX="136.0" layoutY="177.0" promptText="Enter name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label layoutX="68.0" layoutY="181.0" text="Name:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <TextField fx:id="txtName" layoutX="157.0" layoutY="177.0" onKeyReleased="#txtNameOnKeyReleased" promptText="Enter name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <Label layoutX="63.0" layoutY="375.0" text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField fx:id="txtAddress" layoutX="136.0" layoutY="371.0" promptText="Enter address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label layoutX="69.0" layoutY="375.0" text="Address:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <TextField fx:id="txtAddress" layoutX="153.0" layoutY="371.0" promptText="Enter address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-    <Label layoutX="56.0" layoutY="417.0" text="Date of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <DatePicker fx:id="datePickerDob" layoutX="136.0" layoutY="413.0" prefHeight="26.0" prefWidth="150.0" promptText="Select date of birth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label layoutX="67.0" layoutY="417.0" text="Date of Birth:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <DatePicker fx:id="datePickerDob" layoutX="152.0" layoutY="413.0" prefHeight="26.0" prefWidth="150.0" promptText="Select date of birth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-    <Label layoutX="64.0" layoutY="231.0" text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <TextField fx:id="txtContact" layoutX="136.0" layoutY="227.0" promptText="Enter contact" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <Label layoutX="68.0" layoutY="231.0" text="Contact:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <TextField fx:id="txtContact" layoutX="155.0" layoutY="227.0" onKeyPressed="#txtContactOnKeyReleased" promptText="Enter contact" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-    <Label layoutX="70.0" layoutY="280.0" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <TextField fx:id="txtEmail" layoutX="136.0" layoutY="276.0" promptText="Enter email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <Label layoutX="70.0" layoutY="280.0" text="Email:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="5">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <TextField fx:id="txtEmail" layoutX="154.0" layoutY="276.0" onKeyPressed="#txtEmailOnKeyReleased" promptText="Enter email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-    <Label layoutX="65.0" layoutY="329.0" text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label layoutX="70.0" layoutY="329.0" text="Gender:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="6">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
 
-    <Label layoutX="359.0" layoutY="231.0" text="Advance:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-    <TextField fx:id="txtAdvance" layoutX="454.0" layoutY="227.0" promptText="Enter advance" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <Label layoutX="381.0" layoutY="231.0" text="Advance:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="6">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <TextField fx:id="txtAdvance" layoutX="491.0" layoutY="227.0" onKeyReleased="#txtAdvanceOnKeyReleased" promptText="Enter advance" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-    <Label layoutX="350.0" layoutY="181.0" text="Registration Date:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-    <DatePicker fx:id="datePickerRegistrationDate" layoutX="454.0" layoutY="177.0" prefHeight="26.0" prefWidth="150.0" promptText="Select registration date" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    <Label layoutX="381.0" layoutY="181.0" text="Registration Date:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="7">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+    <DatePicker fx:id="datePickerRegistrationDate" layoutX="491.0" layoutY="177.0" prefHeight="26.0" prefWidth="150.0" promptText="Select registration date" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-    <Button fx:id="btnSubmit" layoutX="677.0" layoutY="289.0" onAction="#btnSubmitOnAction" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-    <TableView fx:id="tblStudent" layoutX="50.0" layoutY="463.0" prefHeight="214.0" prefWidth="716.0">
+<!--    <Button fx:id="btnSubmit" layoutX="396.0" layoutY="486.0" onAction="#btnSubmitOnAction" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="8" />-->
+    <TableView fx:id="tblStudent" layoutX="6.0" layoutY="515.0" prefHeight="214.0" prefWidth="707.0">
         <columns>
             <TableColumn fx:id="colId" prefWidth="47.199981689453125" text="ID" />
             <TableColumn fx:id="colName" prefWidth="87.9999771118164" text="Name" />
@@ -59,15 +92,28 @@
             <TableColumn fx:id="colAdvance" prefWidth="99.199951171875" text="Advance" />
         </columns>
     </TableView>
-    <RadioButton fx:id="radioMale" layoutX="136.0" layoutY="329.0" mnemonicParsing="false" text="Male">
+    <RadioButton fx:id="radioMale" layoutX="156.0" layoutY="329.0" mnemonicParsing="false" text="Male">
         <toggleGroup>
             <ToggleGroup fx:id="genderGroup" />
         </toggleGroup></RadioButton>
-    <RadioButton fx:id="radioFemale" layoutX="214.0" layoutY="329.0" mnemonicParsing="false" text="Female" toggleGroup="$genderGroup" />
-    <Button fx:id="btnUpdate" layoutX="676.0" layoutY="325.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" text="Update" />
-    <Button fx:id="btnDelete" layoutX="678.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="55.0" text="Delete" />
-    <Button fx:id="btnClear" layoutX="679.0" layoutY="400.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="54.0" text="Clear" />
-    <ListView fx:id="lsProgram" layoutX="454.0" layoutY="275.0" prefHeight="147.0" prefWidth="150.0" />
-    <Label fx:id="lblCoursers" layoutX="353.0" layoutY="279.0" prefHeight="18.0" prefWidth="60.0" text="coursers" />
+    <RadioButton fx:id="radioFemale" layoutX="241.0" layoutY="329.0" mnemonicParsing="false" text="Female" toggleGroup="$genderGroup" />
+    <Button fx:id="btnSubmit" layoutX="381.0" layoutY="479.0" mnemonicParsing="false" onAction="#btnSubmitOnAction" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Submit" />
+
+    <Button fx:id="btnUpdate" layoutX="458.0" layoutY="479.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #FF9800; -fx-text-fill: white;" text="Update" />
+
+    <Button fx:id="btnDelete" layoutX="535.0" layoutY="479.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="Delete" />
+
+    <Button fx:id="btnClear" layoutX="612.0" layoutY="479.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;" text="Clear" />
+
+    <ListView fx:id="lsProgram" layoutX="490.0" layoutY="275.0" prefHeight="147.0" prefWidth="150.0" />
+    <Label fx:id="lblCoursers" layoutX="381.0" layoutY="279.0" prefHeight="18.0" prefWidth="60.0" text="coursers" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+   <ImageView fitHeight="85.0" fitWidth="112.0" layoutX="9.0" layoutY="7.0">
+      <image>
+         <Image url="@../assets/img_3.png" />
+      </image>
+   </ImageView>
 
 </AnchorPane>

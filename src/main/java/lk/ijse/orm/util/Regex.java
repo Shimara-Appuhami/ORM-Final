@@ -20,6 +20,13 @@ public class Regex {
                 break;
             case EMAIL:
                 filed = "^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$";
+                break;
+            case CONTACT:
+                filed="^(?:\\+94|0)(?:\\d{9}|\\d{2,3}-\\d{7})$";
+                break;
+            case ADVANCE:
+                filed="^£?(([0-9]{1,20}(,\\d{3})*(\\.\\d{2})?)|(0\\.[0-9]\\d)|(00[0-9]))$";
+                break;
         }
 
         Pattern pattern = Pattern.compile(filed);
@@ -40,15 +47,16 @@ public class Regex {
         return false;
     }
 
-    public static boolean setTextColor(TextField location, JFXTextField textField){
+    public static boolean setTextColor(TextField location, javafx.scene.control.TextField textField){
         if (Regex.isTextFieldValid(location, textField.getText())){
-            textField.setFocusColor(Paint.valueOf("Green"));
-            textField.setUnFocusColor(Paint.valueOf("Green"));
+            textField.setStyle("-fx-text-fill: Green;");
+            textField.setStyle("-fx-text-fill: Green;");
             return true;
         }else {
-            textField.setFocusColor(Paint.valueOf("Red"));
-            textField.setUnFocusColor(Paint.valueOf("Red"));
+            textField.setStyle("-fx-text-fill: Red;");
+            textField.setStyle("-fx-text-fill: Red;");
             return false;
         }
     }
+
 }

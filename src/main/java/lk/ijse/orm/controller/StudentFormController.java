@@ -1,5 +1,6 @@
 package lk.ijse.orm.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.impl.ProgramBOImpl;
 import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
@@ -15,6 +17,7 @@ import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.dto.StudentProgramDetailsDTO;
 import lk.ijse.orm.entity.Program;
 import lk.ijse.orm.entity.Student;
+import lk.ijse.orm.util.Regex;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -163,7 +166,7 @@ public class StudentFormController {
         ObservableList<String> selectedPrograms = lsProgram.getSelectionModel().getSelectedItems();
 
         for (String programName : selectedPrograms) {
-            try {
+            try {if (isValied()) {
                 ProgramDTO programDTO = findProgramByName(programName);
                 if (programDTO != null) {
                     StudentProgramDetailsDTO details = new StudentProgramDetailsDTO();
@@ -174,6 +177,7 @@ public class StudentFormController {
                 } else {
                     showAlert("Warning", "Program not found: " + programName);
                 }
+            }
             } catch (Exception e) {
                 showAlert("Error", "Error finding program: " + e.getMessage());
             }
@@ -204,7 +208,7 @@ public class StudentFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent actionEvent) {
-        try {
+        try {if (isValied()) {
             String stId = txtStId.getText();
             String name = txtName.getText();
             String address = txtAddress.getText();
@@ -219,6 +223,7 @@ public class StudentFormController {
             studentBO.updateStudent(updatedStudent);
             showAlert("Success", "Student updated successfully!");
             loadTable();
+        }
         } catch (Exception e) {
             showAlert("Error", "Error updating student: " + e.getMessage());
             e.printStackTrace();
@@ -328,7 +333,37 @@ public class StudentFormController {
 //        }
 //    }
 
+    public boolean isValied() {
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtName)) return false;
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.CONTACT,  txtContact)) return false;
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.EMAIL,  txtEmail)) return false;
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.ADVANCE,  txtAdvance)) return false;
 
 
 
+
+
+        return true;
+    }
+
+
+    public void txtNameOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtName);
+
+    }
+
+    public void txtContactOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.CONTACT,txtContact);
+
+    }
+
+    public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.EMAIL,txtEmail);
+
+    }
+
+    public void txtAdvanceOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.ADVANCE,txtAdvance);
+
+    }
 }

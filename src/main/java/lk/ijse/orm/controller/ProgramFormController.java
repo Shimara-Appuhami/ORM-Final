@@ -6,11 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.impl.ProgramBOImpl;
 import lk.ijse.orm.bo.custom.impl.StudentBOImpl;
 import lk.ijse.orm.dto.ProgramDTO;
 import lk.ijse.orm.dto.StudentDTO;
+import lk.ijse.orm.util.Regex;
 
 import java.time.LocalDate;
 
@@ -93,11 +95,11 @@ public class ProgramFormController {
     }
 
     public void btnSubmitOnAction(ActionEvent actionEvent) {
-        try {
+        try {if (isValied()) {
             String id = txtProgramId.getText();
             String name = txtProgramName.getText();
             String duration = txtDuration.getText();
-            String fee=txtFee.getText();
+            String fee = txtFee.getText();
 
             if (id.isEmpty() || name.isEmpty() || duration.isEmpty() || fee.isEmpty()) {
                 new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
@@ -106,14 +108,17 @@ public class ProgramFormController {
 
             try {
                 fee = String.valueOf(Double.parseDouble(txtFee.getText()));
+
             } catch (NumberFormatException e) {
                 new Alert(Alert.AlertType.ERROR, "Invalid fees").show();
                 return;
             }
-            ProgramDTO program = new ProgramDTO(id,name, duration,fee);
+
+            ProgramDTO program = new ProgramDTO(id, name, duration, fee);
             programBO.addProgram(program);
             initialize();
             new Alert(Alert.AlertType.INFORMATION, "Program added successfully").show();
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,17 +126,18 @@ public class ProgramFormController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
 
-        try {
+        try {if (isValied()) {
             String id = txtProgramId.getText();
             String name = txtProgramName.getText();
             String duration = txtDuration.getText();
-            String fee=txtFee.getText();
+            String fee = txtFee.getText();
 
             ProgramDTO updateProgram = new ProgramDTO(id, name, duration, fee);
 
             programBO.updateProgram(updateProgram);
             new Alert(Alert.AlertType.INFORMATION, "Program Updated successfully!").show();
             loadTable();
+        }
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error updating Program: " + e.getMessage()).show();
             e.printStackTrace();
@@ -166,5 +172,14 @@ public class ProgramFormController {
         txtProgramName.clear();
         txtDuration.clear();
         txtFee.clear();
+    }
+    public boolean isValied() {
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.ADVANCE,txtFee)) return false;
+
+        return true;
+    }
+
+    public void txtFeeOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.ADVANCE,txtFee);
     }
 }

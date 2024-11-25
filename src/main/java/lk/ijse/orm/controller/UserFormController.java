@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.UserBO;
 import lk.ijse.orm.dto.ProgramDTO;
 import lk.ijse.orm.dto.StudentDTO;
 import lk.ijse.orm.dto.UserDTO;
+import lk.ijse.orm.util.Regex;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
@@ -121,11 +123,11 @@ public class UserFormController {
 
     @FXML
     void btnSubmitOnAction(ActionEvent event) {
-        try {
+        try {if (isValied()) {
             String id = txtUserId.getText();
             String name = txtUsername.getText();
             String password = txtPassword.getText();
-            String possession=txtPossession.getText();
+            String possession = txtPossession.getText();
 
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -135,10 +137,11 @@ public class UserFormController {
             }
 
 
-            UserDTO user = new UserDTO(id,name, hashedPassword,possession);
+            UserDTO user = new UserDTO(id, name, hashedPassword, possession);
             userBO.addUser(user);
             initialize();
             new Alert(Alert.AlertType.INFORMATION, "Program added successfully").show();
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,7 +149,7 @@ public class UserFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        try {
+        try {if (isValied()) {
             String id = txtUserId.getText();
             String name = txtUsername.getText();
             String password = txtPassword.getText();
@@ -167,6 +170,7 @@ public class UserFormController {
             } else {
                 new Alert(Alert.AlertType.ERROR, "User update failed").show();
             }
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,4 +201,20 @@ public class UserFormController {
         }
     }
 
+    public void txtPossessionOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtPossession);
+    }
+
+    public void txtUsernameOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtUsername);
+    }
+    public boolean isValied() {
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtUsername)) return false;
+        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,  txtPossession)) return false;
+
+
+
+
+        return true;
+    }
 }

@@ -63,14 +63,11 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public UserDTO findPositionByUserName(String username) {
-        // Retrieve user by username
         User user = userDAO.findByUsername(username);
 
-        // If user exists, return UserDTO with user's details
         if (user != null) {
             return new UserDTO(user.getUserId(), user.getUsername(), user.getPassword(), user.getPossession());
         } else {
-            // Optional: Add logging if user is not found for debugging purposes
             return null;
         }
     }
