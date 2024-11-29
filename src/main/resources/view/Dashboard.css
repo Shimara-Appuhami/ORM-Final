@@ -65,7 +65,7 @@
 }
 
 /* Image Styling */
-.image-view {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 4); /* Subtle shadow for depth */
-    -fx-padding: 20px;
-}
+/*.image-view {*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 4); !* Subtle shadow for depth *!*/
+/*    -fx-padding: 20px;*/
+/*}*/

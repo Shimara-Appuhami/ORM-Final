@@ -10,6 +10,9 @@ import javafx.scene.input.KeyCode;
 import lk.ijse.orm.bo.BoFactory;
 import lk.ijse.orm.bo.custom.StudentProgramBO;
 import lk.ijse.orm.dto.StudentProgramDetailsDTO;
+import lk.ijse.orm.entity.StudentProgramDetails;
+
+import java.util.List;
 
 public class DetailsFormController {
 
@@ -40,36 +43,42 @@ public class DetailsFormController {
         colRegistrationDate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
         loadTable();
 
-        tblDetail.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-        searchDetailByName();            }
-        });
+//        tblDetail.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//            if (newSelection != null) {
+//        searchDetailByName();            }
+//        });
 
-        txtSearch.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-               loadTable();
-            }
-        });
+//        txtSearch.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//               loadTable();
+//            }
+//        });
     }
     private void searchDetailByName() {
         String studentName = txtSearch.getText();
         try {
-            StudentProgramDetailsDTO student = studentProgramBO.search(studentName);
+            List<StudentProgramDetailsDTO> studentListFromBO = studentProgramBO.searchh(studentName);
+
+            // Create an ObservableList to populate the TableView
             ObservableList<StudentProgramDetailsDTO> studentList = FXCollections.observableArrayList();
-            if (student != null) {
-                studentList.add(student);
-                tblDetail.setItems(studentList);
-                tblDetail.getSelectionModel().select(student);
-//                fillTextFields(student);
+
+            // Check if the returned list is not null or empty
+            if (studentListFromBO != null && !studentListFromBO.isEmpty()) {
+                studentList.addAll(studentListFromBO);  // Add all items to the ObservableList
+                tblDetail.setItems(studentList);        // Set the items in the TableView
+                tblDetail.getSelectionModel().selectFirst(); // Optional: select the first item
             } else {
-//                clearFields();
-                loadTable();
+                // Clear the table or display all data if the search returns no result
+                tblDetail.getItems().clear();
+                loadTable(); // Method to reload or reset the table data
             }
         } catch (Exception e) {
-//            showAlert("Error", "Error searching student: " + e.getMessage());
             e.printStackTrace();
+            // Optional: Show an alert with error information
+            // showAlert("Error", "Error searching student: " + e.getMessage());
         }
     }
+
     private void loadTable() {
         try {
             ObservableList<StudentProgramDetailsDTO> detailList = FXCollections.observableArrayList(studentProgramBO.getAllStudentPrograms());
@@ -82,6 +91,7 @@ public class DetailsFormController {
 
     @FXML
     public void btnSearchOnAction(ActionEvent actionEvent) {
+        searchDetailByName();
 
 
 

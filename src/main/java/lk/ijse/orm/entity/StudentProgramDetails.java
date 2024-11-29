@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class StudentProgramDetails implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int student_program_id;
 
     @ManyToOne

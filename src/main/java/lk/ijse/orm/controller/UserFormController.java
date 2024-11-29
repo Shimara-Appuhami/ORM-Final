@@ -21,6 +21,7 @@ import java.time.LocalDate;
 
 public class UserFormController {
 
+    public ComboBox txtPossession;
     @FXML
     private Button btnClear;
 
@@ -48,8 +49,7 @@ public class UserFormController {
     @FXML
     private PasswordField txtPassword;
 
-    @FXML
-    private TextField txtPossession;
+
 
     @FXML
     private TextField txtUserId;
@@ -62,8 +62,8 @@ public class UserFormController {
 
     private UserBO userBO = (UserBO) BoFactory.getBoFactory().getBo(BoFactory.BoTypes.USER);
 
+
     public void initialize() {
-        // Set up cell value factories
         colId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
@@ -84,6 +84,7 @@ public class UserFormController {
 
         String nextId = userBO.getNextId();
         txtUserId.setText(nextId);
+        txtPossession.getItems().addAll("admin","coordinator","lecture");
     }
     private void loadTable() {
         try {
@@ -100,7 +101,7 @@ public class UserFormController {
         txtUserId.clear();
         txtUsername.clear();
         txtPassword.clear();
-        txtPossession.clear();
+        txtPossession.setValue(null);
 
     }
 
@@ -127,7 +128,7 @@ public class UserFormController {
             String id = txtUserId.getText();
             String name = txtUsername.getText();
             String password = txtPassword.getText();
-            String possession = txtPossession.getText();
+            String possession = String.valueOf(txtPossession.getValue());
 
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -141,6 +142,10 @@ public class UserFormController {
             userBO.addUser(user);
             initialize();
             new Alert(Alert.AlertType.INFORMATION, "Program added successfully").show();
+            txtUserId.clear();
+            txtUsername.clear();
+            txtPassword.clear();
+            txtPossession.setValue(null);
         }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +158,7 @@ public class UserFormController {
             String id = txtUserId.getText();
             String name = txtUsername.getText();
             String password = txtPassword.getText();
-            String possession = txtPossession.getText();
+            String possession = String.valueOf(txtPossession.getValue());
 
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -180,7 +185,7 @@ public class UserFormController {
         txtUserId.setText(String.valueOf(user.getUserId()));
         txtUsername.setText(user.getUsername());
         txtPassword.setText(user.getPassword());
-        txtPossession.setText(user.getPossession());
+        txtPossession.setValue(user.getPossession());
 
     }
     private void searchStudentByName() {
@@ -202,7 +207,7 @@ public class UserFormController {
     }
 
     public void txtPossessionOnKeyReleased(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtPossession);
+//        Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtPossession);
     }
 
     public void txtUsernameOnKeyReleased(KeyEvent keyEvent) {
@@ -210,7 +215,7 @@ public class UserFormController {
     }
     public boolean isValied() {
         if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,txtUsername)) return false;
-        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,  txtPossession)) return false;
+//        if (!Regex.setTextColor(lk.ijse.orm.util.TextField.NAME,  txtPossession)) return false;
 
 
 

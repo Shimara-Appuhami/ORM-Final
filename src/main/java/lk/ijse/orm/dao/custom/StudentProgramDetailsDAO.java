@@ -12,4 +12,5 @@ public interface StudentProgramDetailsDAO extends CrudDAO<StudentProgramDetails>
     boolean delete(int studentProgramId, Session session);
 
     List<StudentProgramDetails> getStudentId(int i, Session session);
+    public List<StudentProgramDetails> searchh(String name) ;
 }

@@ -22,11 +22,12 @@ public class Regex {
                 filed = "^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$";
                 break;
             case CONTACT:
-                filed="^(?:\\+94|0)(?:\\d{9}|\\d{2,3}-\\d{7})$";
+                filed="^(?:\\\\+94|94|0)(7[0-9]|0[0-9])[0-9]{7,8}$";
                 break;
             case ADVANCE:
-                filed="^£?(([0-9]{1,20}(,\\d{3})*(\\.\\d{2})?)|(0\\.[0-9]\\d)|(00[0-9]))$";
+                filed="^[0-9]+(\\.[0-9]{1,2})?$";
                 break;
+
         }
 
         Pattern pattern = Pattern.compile(filed);

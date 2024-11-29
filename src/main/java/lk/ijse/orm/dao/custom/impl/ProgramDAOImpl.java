@@ -21,7 +21,7 @@ public class ProgramDAOImpl implements ProgramDAO {
         session.save(entity);
         transaction.commit();
         session.close();
-        return true; // Return true to indicate successful save
+        return true;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ProgramDAOImpl implements ProgramDAO {
         session.update(entity);
         transaction.commit();
         session.close();
-        return true; // Return true to indicate successful update
+        return true;
     }
 
     @Override
@@ -53,15 +53,14 @@ public class ProgramDAOImpl implements ProgramDAO {
             session.delete(program);
             transaction.commit();
             session.close();
-            return true; // Return true to indicate successful deletion
+            return true;
         }
         session.close();
-        return false; // Return false if no program found with given id
+        return false;
     }
 
     @Override
     public Program search(String name) {
-        // You can implement this method if needed
         return null;
     }
 
@@ -72,7 +71,7 @@ public class ProgramDAOImpl implements ProgramDAO {
             String hql = "FROM Program p WHERE p.program_name = :programName";
             Query<Program> query = session.createQuery(hql, Program.class);
             query.setParameter("programName", programName);
-            return query.uniqueResult(); // Returns null if no results are found
+            return query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Error retrieving program by name: " + e.getMessage());
@@ -83,14 +82,13 @@ public class ProgramDAOImpl implements ProgramDAO {
     @Override
     public Program findById(String programId) {
         Session session = FactoryConfiguration.getInstance().getSession();
-        return session.get(Program.class, programId); // Assuming programId is the primary key
+        return session.get(Program.class, programId);
     }
     @Override
     public String getNextId() {
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
 
-            // Query to get the maximum numeric ID from the table
             Query<String> query = session.createQuery("SELECT MAX(program_id) FROM Program ", String.class);
             String maxIdStr = query.uniqueResult();
 
@@ -98,16 +96,14 @@ public class ProgramDAOImpl implements ProgramDAO {
             session.close();
 
             if (maxIdStr != null) {
-                // Parse maxIdStr to integer and increment it
                 int nextId = Integer.parseInt(maxIdStr) + 1;
-                return String.valueOf(nextId); // Convert back to String
+                return String.valueOf(nextId);
             } else {
-                // If no records exist, start with "1"
                 return "1";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "1"; // Default to "1" in case of an error
+            return "1";
         }
     }
 
@@ -116,7 +112,6 @@ public class ProgramDAOImpl implements ProgramDAO {
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
 
-            // Query to get the total number of records in the table
             Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Program ", Long.class);
             long count = query.uniqueResult();
 
@@ -126,7 +121,7 @@ public class ProgramDAOImpl implements ProgramDAO {
             return (int) count;
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // Default to 0 in case of an error
+            return 0;
         }
     }
 

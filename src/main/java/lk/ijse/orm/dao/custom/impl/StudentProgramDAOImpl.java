@@ -5,6 +5,7 @@ import lk.ijse.orm.dao.custom.StudentProgramDetailsDAO;
 import lk.ijse.orm.entity.StudentProgramDetails;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,8 +56,29 @@ public class StudentProgramDAOImpl implements StudentProgramDetailsDAO {
 
     @Override
     public StudentProgramDetails search(String name) {
-        return null;
+        Session session = null;
+        Transaction transaction = null;
+        StudentProgramDetails studentProgramDetails = null;
+
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            String hql = "FROM StudentProgramDetails spd JOIN spd.student s WHERE s.name = :name";
+
+            Query<StudentProgramDetails> query = session.createQuery(hql, StudentProgramDetails.class);
+            query.setParameter("name", name);
+            studentProgramDetails = query.uniqueResult();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+        return studentProgramDetails;
     }
+
+
 
 
     @Override
@@ -80,4 +102,28 @@ public class StudentProgramDAOImpl implements StudentProgramDetailsDAO {
             return List.of();
         }
     }
+
+    public List<StudentProgramDetails> searchh(String name) {
+        Session session = null;
+        Transaction transaction = null;
+        List<StudentProgramDetails> studentProgramDetailsList = null;
+
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            String hql = "FROM StudentProgramDetails spd JOIN FETCH spd.student s WHERE s.name = :name";
+
+            Query<StudentProgramDetails> query = session.createQuery(hql, StudentProgramDetails.class);
+            query.setParameter("name", name);
+            studentProgramDetailsList = query.list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+        return studentProgramDetailsList;
+    }
+
 }

@@ -23,7 +23,7 @@
             <TableColumn fx:id="colRegistrationDate" prefWidth="163.19998168945312" text="Registration Date" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearch" layoutX="210.0" layoutY="294.0" />
+      <TextField fx:id="txtSearch" layoutX="210.0" layoutY="294.0" promptText="Enter the Student Name" />
       <Button fx:id="btnSearch" layoutX="374.0" layoutY="291.0" mnemonicParsing="false" onAction="#btnSearchOnAction" style="-fx-background-color: #4CAF50;" text="Search" textFill="WHITE">
          <font>
             <Font name="Bookman Old Style Bold" size="14.0" />

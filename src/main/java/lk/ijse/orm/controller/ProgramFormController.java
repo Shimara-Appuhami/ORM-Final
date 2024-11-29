@@ -93,6 +93,11 @@ public class ProgramFormController {
     void txtProgramNameOnAction(ActionEvent event) {
 
     }
+    public void clearField(){
+        txtProgramName.setText("");
+        txtDuration.setText("");
+        txtFee.setText("");
+    }
 
     public void btnSubmitOnAction(ActionEvent actionEvent) {
         try {if (isValied()) {
@@ -118,6 +123,7 @@ public class ProgramFormController {
             programBO.addProgram(program);
             initialize();
             new Alert(Alert.AlertType.INFORMATION, "Program added successfully").show();
+            clearField();
         }
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,7 +142,8 @@ public class ProgramFormController {
 
             programBO.updateProgram(updateProgram);
             new Alert(Alert.AlertType.INFORMATION, "Program Updated successfully!").show();
-            loadTable();
+            initialize();
+            clearField();
         }
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error updating Program: " + e.getMessage()).show();
@@ -158,6 +165,7 @@ public class ProgramFormController {
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION, "Program deleted successfully!").show();
                 initialize();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Program not found with ID: " + id).show();
             }
